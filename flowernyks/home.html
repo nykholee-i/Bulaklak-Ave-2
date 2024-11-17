@@ -1,0 +1,337 @@
+<!DOCTYPE html>  
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bulaklak Ave: Gift Shop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Modal Styles */
+    .login-modal {
+      display: none; /* Hidden by default */ 
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      justify-content: center;
+      align-items: center;
+    }
+    .login-modal-content {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      width: 300px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+    .login-modal-content h2 {
+      margin-bottom: 20px;
+    }
+    .login-modal-content input {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .login-modal-content button {
+      padding: 10px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .login-modal-content button:hover {
+      background-color: #45a049;
+    }
+    .login-modal-content .close-btn {
+      background-color: #f44336;
+    }
+    .login-modal-content .close-btn:hover {
+      background-color: #e53935;
+    }
+
+    /* General Styles */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    body {
+      background-color: #fff;
+      margin: 0;
+      padding: 0;
+      scroll-behavior: smooth;
+    }
+
+    /* Header Styles */
+    header {
+      background-color: #111;
+      color: white;
+      padding: 10px 50px;
+    }
+    .navTop {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .shopLocation {
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+    }
+    .shopName {
+      position: absolute;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .shopName h1 {
+      font-family: 'Dancing Script', cursive;
+      font-size: 38px;
+      margin: 0;
+      font-weight: 700;
+      letter-spacing: 1px;
+      color: white;
+    }
+    .navRight {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .searchInput {
+      padding: 5px;
+      border-radius: 5px;
+      border: none;
+      font-size: 14px;
+      font-weight: 300;
+    }
+    .searchBtn, .loginBtn, .cartBtn {
+      background-color: #e91e63;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .searchBtn:hover, .loginBtn:hover, .cartBtn:hover {
+      background-color: #c2185b;
+    }
+    .navBottom {
+      margin-top: 10px;
+      display: flex;
+      justify-content: center;
+    }
+    .menuList {
+      list-style: none;
+      display: flex;
+      gap: 30px;
+      margin: 0;
+      padding: 0;
+    }
+    .menuList li a {
+      color: lightgray;
+      text-decoration: none;
+      font-size: 13px;
+      font-weight: 400;
+      letter-spacing: 0.5px;
+    }
+    .menuList li a:hover {
+      color: white;
+    }
+    .menuList li a sup {
+      font-size: 9px;
+      color: #e91e63;
+      vertical-align: super;
+      font-weight: 500;
+      background: #ff6b6b;
+      color: white;
+      padding: 2px 6px;
+      border-radius: 12px;
+    }
+
+    /* Hero Section Styles */
+    .hero {
+      min-height: calc(100vh - 100px);
+      display: flex;
+      align-items: center;
+      background-color: #ffe6e6;
+      padding: 0 50px;
+    }
+    .hero-content {
+      flex: 1;
+      padding: 50px 0;
+    }
+    .collection-label {
+      color: #ff6b6b;
+      font-size: 13px;
+      letter-spacing: 4px;
+      font-weight: 500;
+      text-transform: uppercase;
+    }
+    .hero-content h2 {
+      font-size: 52px;
+      color: #333;
+      margin: 20px 0;
+      line-height: 1.1;
+      font-weight: 600;
+      letter-spacing: -0.5px;
+    }
+    .hero-content p {
+      color: #666;
+      margin-bottom: 30px;
+      line-height: 1.6;
+      font-size: 14px;
+      font-weight: 300;
+      letter-spacing: 0.2px;
+    }
+    .shop-now {
+      background-color: #ff6b6b;
+      color: white;
+      border: none;
+      padding: 12px 30px;
+      font-size: 14px;
+      font-weight: 500;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      letter-spacing: 0.5px;
+    }
+    .shop-now:hover {
+      background-color: #ff5252;
+    }
+    .hero-image {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-image img {
+      max-width: 100%;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="navTop">
+        <div class="shopLocation">
+          <span>📍 Store Location</span>
+        </div>
+        <div class="shopName">
+          <h1>Bulaklak Ave.</h1>
+        </div>
+        <div class="navRight">
+          <input type="text" placeholder="Search for product" class="searchInput">
+          <button class="searchBtn">🔍</button>
+          <button class="loginBtn" id="openLogin">Login</button>
+          
+          <button class="cartBtn" id="cartBtn">🛒</button> 
+          
+        </div>
+      </div>
+      <div class="navBottom">
+        <ul class="menuList">
+          <li><a href="home.html">Home</a></li>
+          <li><a href="category.html">Category</a></li>
+          <li><a href="shop.html">Shop</a></li>
+          <li><a href="popular.html">Popular <sup>Hot Offers</sup></a></li>
+          <li><a href="recent.html">Recent</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  
+  <section class="hero">
+    <div class="hero-content">
+      <span class="collection-label">C O L L E C T I O N</span>
+      <h2>Various<br>Collection of<br>Gifts or Souvenirs</h2>
+      <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit.<br>Consequatur provident saepe quia incidunt iusto fugit</p>
+      <button class="shop-now">Shop Now</button>
+    </div>
+    <div class="hero-image">
+      <img src="Home.jpg" alt="Home">
+    </div>
+  </section>
+  
+  <!-- Login/Registration Modal -->
+  <div id="loginModal" class="login-modal">
+    <div class="login-modal-content">
+      <span class="close-btn">&times;</span>
+      
+      <!-- Login Form -->
+      <div id="loginForm" class="form-content">
+        <h2>Login</h2>
+        <form id="loginFormFields">
+          <label for="loginUsername">Username:</label>
+          <input type="text" id="loginUsername" name="username" required>
+          <label for="loginPassword">Password:</label>
+          <input type="password" id="loginPassword" name="password" required>
+          <button type="submit">Login</button>
+          <p>Don't have an account? <a href="#" id="switchToRegister">Register here</a></p>
+        </form>
+      </div>
+      
+      <!-- Registration Form -->
+      <div id="registerForm" class="form-content" style="display: none;">
+        <h2>Register</h2>
+        <form id="registerFormFields">
+          <label for="registerUsername">Username:</label>
+          <input type="text" id="registerUsername" name="username" required>
+          <label for="registerPassword">Password:</label>
+          <input type="password" id="registerPassword" name="password" required>
+          <label for="registerEmail">Email:</label>
+          <input type="email" id="registerEmail" name="email" required>
+          <button type="submit">Register</button>
+          <p>Already have an account? <a href="#" id="switchToLogin">Login here</a></p>
+        </form>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Modal functionality
+    const openLoginButton = document.getElementById("openLogin");
+    const loginModal = document.getElementById("loginModal");
+    const closeModalButton = document.querySelector(".close-btn");
+
+    const switchToRegister = document.getElementById("switchToRegister");
+    const switchToLogin = document.getElementById("switchToLogin");
+
+    const loginForm = document.getElementById("loginForm");
+    const registerForm = document.getElementById("registerForm");
+
+    openLoginButton.onclick = function() {
+      loginModal.style.display = "flex";
+    };
+
+    closeModalButton.onclick = function() {
+      loginModal.style.display = "none";
+    };
+
+    window.onclick = function(event) {
+      if (event.target == loginModal) {
+        loginModal.style.display = "none";
+      }
+    };
+
+    // Switch between login and register
+    switchToRegister.onclick = function() {
+      loginForm.style.display = "none";
+      registerForm.style.display = "block";
+    };
+
+    switchToLogin.onclick = function() {
+      registerForm.style.display = "none";
+      loginForm.style.display = "block";
+    };
+  </script>
+</body>
+</html>
